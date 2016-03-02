@@ -16,7 +16,7 @@ M569 P1 S0                          ; Drive 1 goes backwards
 M569 P2 S0                         ; Drive 2 goes backwards
 M569 P3 S0                         ; Drive 3 goes backwards
 M569 P4 S0                         ; Drive 4 goes backwards
-M574 X1 Y1 Z1 S0		            ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
+M574 X1 Y1 Z1 S1		            ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
 M906 X800 Y1000 Z800 E800           ; Set motor currents (mA)
 M201 X800 Y800 Z15 E1000            ; Accelerations (mm/s^2)
 M203 X15000 Y15000 Z100 E3600       ; Maximum speeds (mm/min)
@@ -42,3 +42,6 @@ M570 S120				; Increase to allow extra heating time if needed
 ; ### Tool definition ###
 M563 P0 D0 H1         ; tool 0 uses extruder drive 0 and heater 1
 G10 P0 S0 R0 X0 Y0    ; set tool 0 temperatures and offsets
+
+; ### Epilogue ###
+T0                  ; Select the first tool
