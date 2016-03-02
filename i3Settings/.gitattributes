@@ -1,5 +1,6 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
-* text=auto
+*  eol=lf
 
 # Using LF for gcode, as it's recommended on Reprap wiki.
 *.g text eol=lf
+*.gcode text eol=lf
