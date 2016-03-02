@@ -1,6 +1,6 @@
 ; ### General ###
 M111 S0                             ; Debug off
-M550 Tema3d                         ; Machine name (can be anything you like)
+M550 PTema3d                         ; Machine name (can be anything you like)
 M551 Preprap                        ; Machine password (currently not used)
 M540 P0xBE:0xEF:0xDE:0xAD:0xFE:0xED ; MAC Address
 M552 P0.0.0.0                       ; IP address (0 = use DHCP)
@@ -11,12 +11,12 @@ M553 P255.255.255.0                 ; Netmask
 
 
 ; ### Movement ###
-;M569 P0 S1                         ; Drive 0 goes forwards (change to S0 to reverse it)
+M569 P0 S0                         ; Drive 0 goes backwards (change to S0 to reverse it)
 M569 P1 S0                          ; Drive 1 goes backwards
-;M569 P2 S1                         ; Drive 2 goes forwards
-;M569 P3 S0                         ; Drive 3 goes forwards
-;M569 P4 S0                         ; Drive 4 goes forwards
-M574 X1 Y1 Z1 S1		            ; set homing switch configuration (X,Y,Z homing switch only, at low end, active high)
+M569 P2 S0                         ; Drive 2 goes backwards
+M569 P3 S0                         ; Drive 3 goes backwards
+M569 P4 S0                         ; Drive 4 goes backwards
+M574 X1 Y1 Z1 S0		            ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
 M906 X800 Y1000 Z800 E800           ; Set motor currents (mA)
 M201 X800 Y800 Z15 E1000            ; Accelerations (mm/s^2)
 M203 X15000 Y15000 Z100 E3600       ; Maximum speeds (mm/min)
