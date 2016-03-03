@@ -3,7 +3,7 @@ M111 S0                             ; Debug off
 M550 PTema3d                         ; Machine name (can be anything you like)
 M551 Preprap                        ; Machine password (currently not used)
 M540 P0xBE:0xEF:0xDE:0xAD:0xFE:0xED ; MAC Address
-M552 P0.0.0.0                       ; IP address (0 = use DHCP)
+M552 P192.168.137.2                       ; IP address (0 = use DHCP)
 ;M554 P192.168.1.1                  ; Gateway (not used yet)
 M553 P255.255.255.0                 ; Netmask
 ;M555 P2                            ; Set output to look like Marlin
