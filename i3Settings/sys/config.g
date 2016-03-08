@@ -21,7 +21,7 @@ M906 X800 Y1000 Z800 E800           ; Set motor currents (mA)
 M201 X800 Y800 Z15 E1000            ; Accelerations (mm/s^2)
 M203 X15000 Y15000 Z100 E3600       ; Maximum speeds (mm/min)
 M566 X600 Y600 Z30 E20              ; Maximum jerk speeds mm/minute
-M208 X200 Y200 Z200                 ; set axis maxima and high homing switch positions (adjust to suit your machine)
+M208 X160 Y250 Z200                 ; set axis maxima and high homing switch positions (adjust to suit your machine)
 M208 X-8 Y0 Z-0.5 S1                ; set axis minima and low homing switch positions (adjust to make X=0 and Y=0 the edges of the bed)
 M92 X80 Y80 Z4000                   ; set axis steps/mm
 M92 E420:420                        ; set extruder 0 and 1 steps/mm
@@ -45,3 +45,11 @@ G10 P0 S0 R0 X0 Y0    ; set tool 0 temperatures and offsets
 
 ; ### Epilogue ###
 T0                  ; Select the first tool
+
+; ### Config Z-probe ###
+M558 P1 X0 Y0; Enable the probe, but home only Z (no X or Y) with it.
+G31 P500 Z1.0; Set z height to 1.0
+M577 P0 X0.0 Y0.0; Z-plane leveling point #0
+M577 P1 X157.0 Y0.0; Z-plane leveling point #1
+M577 P2 X157.0 Y250.0; Z-plane leveling point #2
+M577 P3 X0.0 Y250.0; Z-plane leveling point #3
