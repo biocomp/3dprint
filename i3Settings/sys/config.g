@@ -17,14 +17,14 @@ M569 P2 S0                         ; Drive 2 goes backwards
 M569 P3 S0                         ; Drive 3 goes backwards
 M569 P4 S1                         ; Drive 4 goes forwards
 M574 X1 Y1 Z1 S1		            ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
-M906 X800 Y1000 Z800 E800           ; Set motor currents (mA)
+M906 X1000 Y1200 Z1000 E800         ; Set motor currents (mA)
 M201 X800 Y800 Z15 E1000            ; Accelerations (mm/s^2)
 M203 X15000 Y15000 Z100 E3600       ; Maximum speeds (mm/min)
 M566 X600 Y600 Z30 E20              ; Maximum jerk speeds mm/minute
 M208 X160 Y250 Z200                 ; set axis maxima and high homing switch positions (adjust to suit your machine)
-M208 X-8 Y0 Z-1.0 S1                ; set axis minima and low homing switch positions (adjust to make X=0 and Y=0 the edges of the bed)
+M208 X0 Y0 Z0.0 S1                  ; set axis minima and low homing switch positions (adjust to make X=0 and Y=0 the edges of the bed)
 M92 X80 Y80 Z4000                   ; set axis steps/mm
-M92 E741.9:741.9                    ; set extruder 0 and 1 steps/mm
+M92 E619:619                        ; set extruder 0 and 1 steps/mm; Need reduce to to 95%?
 G21                                 ; Work in millimetres
 G90                                 ; Send absolute coordinates...
 M83                                 ; ...but relative extruder moves
@@ -48,8 +48,11 @@ T0                  ; Select the first tool
 
 ; ### Config Z-probe ###
 M558 P1 X0 Y0; Enable the probe, but home only Z (no X or Y) with it.
-G31 P500 Z1.4; Set z height to 1.0
+G31 P500 Z1.93; Set z height to 1.0
 M557 P0 X0.0 Y0.0; Z-plane leveling point #0
 M557 P1 X0.0 Y250.0; Z-plane leveling point #1
 M557 P2 X157.0 Y250.0; Z-plane leveling point #2
 M557 P3 X157.0 Y0.0; Z-plane leveling point #3
+
+; ### Fans ###
+M106 P0 I0 S100; Start nozzle fan (needs to be inverted (i0))
