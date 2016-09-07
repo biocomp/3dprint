@@ -11,6 +11,9 @@ M553 P255.255.255.0                 ; Netmask
 
 
 ; ### Movement ###
+G21                                 ; Work in millimetres
+G90                                 ; Send absolute coordinates...
+M83                                 ; ...but relative extruder moves
 M569 P0 S0                         ; Drive 0 goes backwards (change to S0 to reverse it)
 M569 P1 S0                          ; Drive 1 goes backwards
 M569 P2 S0                         ; Drive 2 goes backwards
@@ -24,11 +27,7 @@ M566 X600 Y600 Z30 E20              ; Maximum jerk speeds mm/minute
 M208 X160 Y250 Z200                 ; set axis maxima and high homing switch positions (adjust to suit your machine)
 M208 X0 Y0 Z0.0 S1                  ; set axis minima and low homing switch positions (adjust to make X=0 and Y=0 the edges of the bed)
 M92 X80 Y80 Z4000                   ; set axis steps/mm
-M92 E776:776                        ; set extruder 0 and 1 steps/mm; Need reduce to to 95%?
-G21                                 ; Work in millimetres
-G90                                 ; Send absolute coordinates...
-M83                                 ; ...but relative extruder moves
-
+M92 E640:640                        ; set extruder 0 and 1 steps/mm; Need reduce to to 95%?
 
 ; ### Heater and thermistor ###
 M305 P0 T100000 B3950 R4700 H0 L0	; Put your own H and/or L values here to set the bed thermistor ADC correction
