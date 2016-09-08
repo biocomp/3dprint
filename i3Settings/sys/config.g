@@ -27,7 +27,7 @@ M566 X600 Y600 Z30 E20              ; Maximum jerk speeds mm/minute
 M208 X160 Y250 Z200                 ; set axis maxima and high homing switch positions (adjust to suit your machine)
 M208 X0 Y0 Z0.0 S1                  ; set axis minima and low homing switch positions (adjust to make X=0 and Y=0 the edges of the bed)
 M92 X80 Y80 Z4000                   ; set axis steps/mm
-M92 E640:640                        ; set extruder 0 and 1 steps/mm; Need reduce to to 95%?
+M92 E776:776                        ; set extruder 0 and 1 steps/mm; Need reduce to to 95%?
 
 ; ### Heater and thermistor ###
 M305 P0 T100000 B3950 R4700 H0 L0	; Put your own H and/or L values here to set the bed thermistor ADC correction
@@ -47,7 +47,7 @@ T0                  ; Select the first tool
 
 ; ### Config Z-probe ###
 M558 P1 X0 Y0; Enable the probe, but home only Z (no X or Y) with it.
-G31 P500 Z1.93; Set z height to 1.0
+G31 P500 Z1.95; Set z height to 1.0
 M557 P0 X0.0 Y0.0; Z-plane leveling point #0
 M557 P1 X0.0 Y250.0; Z-plane leveling point #1
 M557 P2 X157.0 Y250.0; Z-plane leveling point #2
