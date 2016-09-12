@@ -1,5 +1,6 @@
-  # 3d printer troubleshooing - my issues and solutions
-  ## Not sticking to bed
+# 3d printer troubleshooing - my issues and solutions
+
+## Not sticking to bed
     
 - Calibrated nozzle to bed distance.
 - Added clear hair spray (this is really nice, but I should try to get away from it, if possible).
