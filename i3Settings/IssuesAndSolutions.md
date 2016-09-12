@@ -9,6 +9,7 @@
 
 ## Overextruding
 See this (my) thread: http://forums.reprap.org/read.php?4,705899,705912
+http://forums.reprap.org/file.php?4,file=83502
 Struggled with this one for a while, till I realized that:
 
 - I'm using too many perimieters (5) - adjusted slic3r to use 1 or 2 perimeters.
