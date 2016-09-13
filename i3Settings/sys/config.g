@@ -20,7 +20,8 @@ M569 P2 S0                         ; Drive 2 goes backwards
 M569 P3 S0                         ; Drive 3 goes backwards
 M569 P4 S1                         ; Drive 4 goes forwards
 M574 X1 Y1 Z1 S1		            ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
-M906 X1000 Y1200 Z1000 E800         ; Set motor currents (mA)
+M906 X1200 Y1300 Z800 E800:800 30         ; Set motor currents (mA)
+M906 X800 Y800 Z800 E800:800 30 H1      ; Set motor currents (mA) for homing
 M201 X800 Y800 Z15 E1000            ; Accelerations (mm/s^2)
 M203 X15000 Y15000 Z100 E3600       ; Maximum speeds (mm/min)
 M566 X600 Y600 Z30 E20              ; Maximum jerk speeds mm/minute
@@ -47,7 +48,7 @@ T0                  ; Select the first tool
 
 ; ### Config Z-probe ###
 M558 P1 X0 Y0; Enable the probe, but home only Z (no X or Y) with it.
-G31 P500 Z1.95; Set z height to 1.0
+G31 P500 Z2.40; Set z height to 1.0
 M557 P0 X0.0 Y0.0; Z-plane leveling point #0
 M557 P1 X0.0 Y250.0; Z-plane leveling point #1
 M557 P2 X157.0 Y250.0; Z-plane leveling point #2
