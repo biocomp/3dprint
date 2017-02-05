@@ -1,0 +1,2 @@
+G91; Set relative positioning
+G1 Z-0.01; // Go lower by -0.01
