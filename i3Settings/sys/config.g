@@ -46,7 +46,7 @@ T0                  ; Select the first tool
 
 ; ### Config Z-probe ###
 M558 P1 X0 Y0; Enable the probe, but home only Z (no X or Y) with it.
-G31 P500 Z0.98; Set z height to 1.0
+G31 P500 Z0.95; Set z height (after z-height sensor calibration)
 
 ; ### 5-point z probe ### 
 M557 P0 X0.0 Y0.0; Z-plane leveling point #0
