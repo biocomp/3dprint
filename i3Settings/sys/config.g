@@ -15,7 +15,7 @@ M83                                 ; ...but relative extruder moves
 M569 P0 S0                         ; Drive 0 (X) goes backwards (change to S0 to reverse it)
 M569 P1 S0                         ; Drive 1 (Y) goes backwards
 M569 P2 S1                         ; Drive 2 (Z) goes forwards
-M569 P3 S1                         ; Drive 3 (extruder 1) goes forwards
+M569 P3 S0                         ; Drive 3 (extruder 1) goes backwards
 M569 P4 S1                         ; Drive 4 (extruder 2) goes forwards
 M574 X1 Y1 Z1 S1		            ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
 M906 X1000 Y1000 Z800 E500:800 30         ; Set motor currents (mA)
@@ -44,9 +44,13 @@ G10 P0 S0 R0 X0 Y0    ; set tool 0 temperatures and offsets
 ; ### Epilogue ###
 T0                  ; Select the first tool
 
-; ### Config Z-probe ###
-M558 P1 X0 Y0; Enable the probe, but home only Z (no X or Y) with it.
-G31 P500 Z0.95; Set z height (after z-height sensor calibration)
+; ### Config Z-probe (BLTouch) ###
+M307 H3 A-1 C-1 D-1; We're using "Heater 3" as control for BLTouch. We're disabling it here.
+M558 P9 H10 F100 T2000; Set Z-probe mode to 9 (BLTouch). 'H' = Dive height (5mm). F100 (probing speed mm/min) T2000 (Tnnn Travel speed to and between probe points (mm/min))
+G31 X0 Y0 Z0 P25 ; Configure probe offsets from nozzle. P is signal threshold.
+
+; M558 P9; Enable the probe, but home only Z (no X or Y) with it.
+; G31 P500 Z0.95; Set z height (after z-height sensor calibration)
 
 ; ### 5-point z probe ### 
 M557 P0 X0.0 Y0.0; Z-plane leveling point #0
