@@ -21,19 +21,25 @@ M574 X1 Y1 Z1 S1		            ; set homing switch configuration (X,Y,Z homing sw
 M906 X1000 Y1000 Z800 E500:800 30         ; Set motor currents (mA)
 M906 X800 Y800 Z800 E500:800 30 H1      ; Set motor currents (mA) for homing
 M201 X700 Y700 Z15 E1000            ; Accelerations (mm/s^2)
-M203 X15000 Y15000 Z100 E3600       ; Maximum speeds (mm/min)
+M203 X15000 Y15000 Z150 E600        ; Maximum speeds (mm/min)
 M566 X600 Y600 Z30 E20              ; Maximum jerk speeds mm/minute
-M208 X159 Y250 Z200                 ; set axis maxima and high homing switch positions (adjust to suit your machine)
-M208 X0 Y0 Z0.0 S1                  ; set axis minima and low homing switch positions (adjust to make X=0 and Y=0 the edges of the bed)
+
+; !!!!These are also set in homex.g, homey.g, homeall.g
+; M208 X2:156 Y36:276 Z200  ; Set axis max and min (adjusted to fit my bed)
+
 M92 X80 Y80 Z4000                   ; set axis steps/mm
-M92 E451:451                        ; set extruder 0 and 1 steps/mm; Need reduce to to 95%?
+
+; e_steps_per_mm = (motor_steps_per_rev * driver_microstep) * (big_gear_teeth / small_gear_teeth) / (hob_effective_diameter * pi)
+; e_steps_per_mm = (200 * 16) * (3/1) / (hob_effective_diameter * pi)
+M92 E415:415                        ; set extruder 0 and 1 steps/mm; Need reduce to to 95%?
 
 ; ### Heater and thermistor ###
+M307 H1 A400.5 C157.3 D2.8 S1.00 V0.0 B0 ; PID setup for the main heater (after auto-tuning)
+
 M305 P0 T100000 B3950 R4700 H0 L0	; Put your own H and/or L values here to set the bed thermistor ADC correction
 M305 P1 T100000 B4388 R4700 H0 L0	; Put your own H and/or L values here to set the first nozzle thermistor ADC correction
 ;M305 P2 T100000 B4388 R4700 H0 L0	; Put your own H and/or L values here to set the second nozzle thermistor ADC correction
-M301 H1 P10 I0.10 D100 T0.50 S1.0	; PID settings for extruder 0
-;M301 H2 P10 I0.10 D100 T0.50 S1.0	; PID settings for extruder 1
+M301 H1 P10 I0.10 D100 T0.50 S1.0	; PID settings for heater 0 (bed)
 M570 S120				; Increase to allow extra heating time if needed
 ;M141 H3                                ; Uncomment this to set chamber heater/thermistor channel
 
@@ -47,18 +53,18 @@ T0                  ; Select the first tool
 ; ### Config Z-probe (BLTouch) ###
 M307 H3 A-1 C-1 D-1; We're using "Heater 3" as control for BLTouch. We're disabling it here.
 M558 P9 H10 F100 T2000; Set Z-probe mode to 9 (BLTouch). 'H' = Dive height (5mm). F100 (probing speed mm/min) T2000 (Tnnn Travel speed to and between probe points (mm/min))
-G31 X0 Y0 Z0 P25 ; Configure probe offsets from nozzle. P is signal threshold.
+G31 X31.5 Y1.4 Z3.236 P25 ; Configure probe offsets from nozzle. P is signal threshold.
+; Trigger height1: 3.234
+; Trigger height2: 3.231
+; Trigger height3: 3.237
 
 ; M558 P9; Enable the probe, but home only Z (no X or Y) with it.
 ; G31 P500 Z0.95; Set z height (after z-height sensor calibration)
 
-; ### 5-point z probe ### 
-M557 P0 X0.0 Y0.0; Z-plane leveling point #0
-M557 P1 X0.0 Y230.0; Z-plane leveling point #1
-M557 P2 X150.0 Y230.0; Z-plane leveling point #2
-M557 P3 X150.0 Y0.0; Z-plane leveling point #3
-M557 P4 X80.0 Y110.0; Z-plane leveling point #4
+; ### Mesh bed probing ### 
+M557 X32:154 Y5:235 S30.5:40 ; probe from X=0 to 100, Y=0 to 230mm with 5x5 points in x and y directions.
 
 ; ### Fans ###
-M106 P0 I0 S100; Start nozzle fan (needs to be inverted (i0))
-M106 P0 I0 S0; Stop nozzle fan (needs to be inverted (i0))
+; P0 is plastic cooling fan
+; P1 is heat breaker fan, and it's on when board is reset.
+
