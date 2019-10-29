@@ -12,14 +12,16 @@ M553 P255.255.255.0                 ; Netmask
 G21                                 ; Work in millimetres
 G90                                 ; Send absolute coordinates...
 M83                                 ; ...but relative extruder moves
-M569 P0 S0                         ; Drive 0 (X) goes backwards (change to S0 to reverse it)
-M569 P1 S0                         ; Drive 1 (Y) goes backwards
-M569 P2 S1                         ; Drive 2 (Z) goes forwards
-M569 P3 S0                         ; Drive 3 (extruder 1) goes backwards
-M569 P4 S1                         ; Drive 4 (extruder 2) goes forwards
-M574 X1 Y1 Z1 S1		            ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
-M906 X1000 Y1000 Z800 E500:800 30         ; Set motor currents (mA)
-M906 X800 Y800 Z800 E500:800 30 H1      ; Set motor currents (mA) for homing
+M569 P0 S0                          ; Drive 0 (X) goes backwards (change to S0 to reverse it)
+M569 P1 S0                          ; Drive 1 (Y) goes backwards
+M569 P2 S1                          ; Drive 2 (Z) goes forwards
+M569 P3 S0                          ; Drive 3 (extruder 1) goes backwards
+M569 P4 S1                          ; Drive 4 (extruder 2) goes forwards
+M574 X1 Y1 Z1 S1                    ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
+
+M906 X1000 Y1000 Z800 E1000:1000 30 ; Set motor currents (mA)
+M906 X800 Y800 Z800 E1000:1000 30 H1; Set motor currents (mA) for homing
+
 M201 X700 Y700 Z15 E1000            ; Accelerations (mm/s^2)
 M203 X15000 Y15000 Z150 E600        ; Maximum speeds (mm/min)
 M566 X600 Y600 Z30 E20              ; Maximum jerk speeds mm/minute
@@ -34,14 +36,18 @@ M92 X80 Y80 Z4000                   ; set axis steps/mm
 M92 E415:415                        ; set extruder 0 and 1 steps/mm; Need reduce to to 95%?
 
 ; ### Heater and thermistor ###
-M307 H1 A400.5 C157.3 D2.8 S1.00 V0.0 B0 ; PID setup for the main heater (after auto-tuning)
+; Heaters:
+M307 H1 A421.1 C181.1 D3.7 S1.00 V0.0 B0 ; PID setup for the main heater (after auto-tuning)
+; M301 H1 P10 I0.10 D100 T0.50 S1.0	; PID settings for heater 0 (bed)
 
-M305 P0 T100000 B3950 R4700 H0 L0	; Put your own H and/or L values here to set the bed thermistor ADC correction
-M305 P1 T100000 B4388 R4700 H0 L0	; Put your own H and/or L values here to set the first nozzle thermistor ADC correction
-;M305 P2 T100000 B4388 R4700 H0 L0	; Put your own H and/or L values here to set the second nozzle thermistor ADC correction
-M301 H1 P10 I0.10 D100 T0.50 S1.0	; PID settings for heater 0 (bed)
-M570 S120				; Increase to allow extra heating time if needed
-;M141 H3                                ; Uncomment this to set chamber heater/thermistor channel
+; Avoiding bed heater fault workaround:
+M570 H0 P20 T20 ; Allow anomaly of temperature for 20 seconds, and temperature disparity of 20C.
+
+; Thermistors:
+M305 P0 T100000 B3950 ; Put your own H and/or L values here to set the bed thermistor ADC correction
+M305 P1 T100000 B4725 C7.06e-8 ; Put your own H and/or L values here to set the first nozzle thermistor ADC correction
+
+M570 S120; Increase to allow extra heating time if needed
 
 ; ### Tool definition ###
 M563 P0 D0 H1         ; tool 0 uses extruder drive 0 and heater 1
@@ -57,9 +63,6 @@ G31 X31.5 Y1.4 Z3.236 P25 ; Configure probe offsets from nozzle. P is signal thr
 ; Trigger height1: 3.234
 ; Trigger height2: 3.231
 ; Trigger height3: 3.237
-
-; M558 P9; Enable the probe, but home only Z (no X or Y) with it.
-; G31 P500 Z0.95; Set z height (after z-height sensor calibration)
 
 ; ### Mesh bed probing ### 
 M557 X32:154 Y5:235 S30.5:40 ; probe from X=0 to 100, Y=0 to 230mm with 5x5 points in x and y directions.
