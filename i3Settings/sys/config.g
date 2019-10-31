@@ -19,11 +19,11 @@ M569 P3 S0                          ; Drive 3 (extruder 1) goes backwards
 M569 P4 S1                          ; Drive 4 (extruder 2) goes forwards
 M574 X1 Y1 Z1 S1                    ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
 
-M906 X1000 Y1000 Z800 E1000:1000 30 ; Set motor currents (mA)
-M906 X800 Y800 Z800 E1000:1000 30 H1; Set motor currents (mA) for homing
+M906 X1000 Y1000 Z800 E500:500 30 ; Set motor currents (mA)
+M906 X800 Y800 Z800 E500:500 30 H1; Set motor currents (mA) for homing
 
 M201 X700 Y700 Z15 E1000            ; Accelerations (mm/s^2)
-M203 X15000 Y15000 Z150 E600        ; Maximum speeds (mm/min)
+M203 X15000 Y15000 Z150 E350        ; Maximum speeds (mm/min)
 M566 X600 Y600 Z30 E20              ; Maximum jerk speeds mm/minute
 
 ; !!!!These are also set in homex.g, homey.g, homeall.g
@@ -37,15 +37,19 @@ M92 E415:415                        ; set extruder 0 and 1 steps/mm; Need reduce
 
 ; ### Heater and thermistor ###
 ; Heaters:
-M307 H1 A421.1 C181.1 D3.7 S1.00 V0.0 B0 ; PID setup for the main heater (after auto-tuning)
+M307 H1 A436.8 C165.1 D3.5 S1.00 V0.0 B0; PID setup for the main heater (after auto-tuning)
+; M307 H1 A421.1 C181.1 D3.7 S1.00 V0.0 B0 ; PID setup for the main heater (after auto-tuning)
 ; M301 H1 P10 I0.10 D100 T0.50 S1.0	; PID settings for heater 0 (bed)
+
+;M301 H1 P10 I0.10 D100 T0.50 S1.0	; PID settings for heater 1 (extruder)
 
 ; Avoiding bed heater fault workaround:
 M570 H0 P20 T20 ; Allow anomaly of temperature for 20 seconds, and temperature disparity of 20C.
+M143 H0 S140 ; Set max bed temperature to 140
 
 ; Thermistors:
-M305 P0 T100000 B3950 ; Put your own H and/or L values here to set the bed thermistor ADC correction
-M305 P1 T100000 B4725 C7.06e-8 ; Put your own H and/or L values here to set the first nozzle thermistor ADC correction
+M305 P0 T100000 B3950 R4700 H-2           ; Bed thermistor (generic chinese)
+M305 P1 T100000 B4725 C7.06e-8 R4700 H5 ; Extruder thermistor (e3d thermistor)
 
 M570 S120; Increase to allow extra heating time if needed
 
@@ -68,6 +72,5 @@ G31 X31.5 Y1.4 Z3.236 P25 ; Configure probe offsets from nozzle. P is signal thr
 M557 X32:154 Y5:235 S30.5:40 ; probe from X=0 to 100, Y=0 to 230mm with 5x5 points in x and y directions.
 
 ; ### Fans ###
-; P0 is plastic cooling fan
-; P1 is heat breaker fan, and it's on when board is reset.
+M106 P1 T45 H1; heat breaker fan is thermostatic, turn it on only if temp > 45c.
 

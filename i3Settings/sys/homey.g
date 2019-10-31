@@ -1,6 +1,7 @@
 G91                ; relative mode
 
-M208 Y-36 S1       ; Set -36 as min so that Y will be set to it when homing switch was hit
+; Y min needs to be changed by -10
+M208 Y-26 S1       ; Set -36 as min so that Y will be set to it when homing switch was hit
 
 G1 Z4 F200 S2      ; raise head to avoid dragging nozzle over the bed (ignore homing)
 G1 Y-240 F3000 S1  ; move up to 240mm in the -Y direction, stopping if the homing switch is triggered
