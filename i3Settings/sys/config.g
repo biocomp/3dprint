@@ -63,10 +63,9 @@ T0                  ; Select the first tool
 ; ### Config Z-probe (BLTouch) ###
 M307 H3 A-1 C-1 D-1; We're using "Heater 3" as control for BLTouch. We're disabling it here.
 M558 P9 H10 F100 T2000; Set Z-probe mode to 9 (BLTouch). 'H' = Dive height (5mm). F100 (probing speed mm/min) T2000 (Tnnn Travel speed to and between probe points (mm/min))
-G31 X31.5 Y1.4 Z3.236 P25 ; Configure probe offsets from nozzle. P is signal threshold.
-; Trigger height1: 3.234
-; Trigger height2: 3.231
-; Trigger height3: 3.237
+G31 X31.5 Y1.4 Z3.362 P25 ; Configure probe offsets from nozzle. P is signal threshold.
+; Trigger height1: 3.36
+; Trigger height2: 3.364
 
 ; ### Mesh bed probing ### 
 M557 X32:154 Y5:235 S30.5:40 ; probe from X=0 to 100, Y=0 to 230mm with 5x5 points in x and y directions.
