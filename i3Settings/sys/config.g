@@ -3,8 +3,8 @@ M111 S0                             ; Debug off
 M550 PTema3d                         ; Machine name (can be anything you like)
 M551 Preprap                        ; Machine password (currently not used)
 M540 P0xBE:0xEF:0xDE:0xAD:0xFE:0xED ; MAC Address
-M552 P192.168.137.2                       ; IP address (0 = use DHCP)
-;M554 P192.168.1.1                  ; Gateway (not used yet)
+M552 P192.168.10.2                       ; IP address (0 = use DHCP)
+;M554 P192.168.2.1                   ; Gateway (not used yet)
 M553 P255.255.255.0                 ; Netmask
 
 
@@ -19,8 +19,8 @@ M569 P3 S0                          ; Drive 3 (extruder 1) goes backwards
 M569 P4 S1                          ; Drive 4 (extruder 2) goes forwards
 M574 X1 Y1 Z1 S1                    ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
 
-M906 X1000 Y1000 Z800 E500:500 30 ; Set motor currents (mA)
-M906 X800 Y800 Z800 E500:500 30 H1; Set motor currents (mA) for homing
+M906 X1200 Y1200 Z800 E500:500 30 ; Set motor currents (mA)
+M906 X1000 Y1000 Z800 E500:500 30 H1; Set motor currents (mA) for homing
 
 M201 X700 Y700 Z15 E1000            ; Accelerations (mm/s^2)
 M203 X15000 Y15000 Z150 E350        ; Maximum speeds (mm/min)
@@ -67,7 +67,7 @@ G31 X31.5 Y1.4 Z3.24 P25 ; Configure probe offsets from nozzle. P is signal thre
 ; Trigger height1: 3.36
 ; Trigger height2: 3.364
 
-; ### Mesh bed probing ### 
+; ### Mesh bed probing ###
 M557 X32:154 Y5:235 S30.5:40 ; probe from X=0 to 100, Y=0 to 230mm with 5x5 points in x and y directions.
 
 ; ### Fans ###
