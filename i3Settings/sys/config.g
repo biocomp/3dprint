@@ -19,8 +19,7 @@ M569 P3 S0                          ; Drive 3 (extruder 1) goes backwards
 M569 P4 S1                          ; Drive 4 (extruder 2) goes forwards
 M574 X1 Y1 Z1 S1                    ; set homing switch configuration (X,Y,Z homing switch only, at low end, active low)
 
-M906 X1200 Y1200 Z800 E500:500 30 ; Set motor currents (mA)
-M906 X1000 Y1000 Z800 E500:500 30 H1; Set motor currents (mA) for homing
+M906 X1400 Y1400 Z800 E500:500 30 ; Set motor currents (mA)
 
 M201 X700 Y700 Z15 E1000            ; Accelerations (mm/s^2)
 M203 X15000 Y15000 Z150 E350        ; Maximum speeds (mm/min)
